@@ -1,0 +1,17 @@
+{
+  "name": "pg-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon demo.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^1.17.5",
+    "pg": "^7.4.3",
+    "sql-template-strings": "^2.2.2"
+  }
+}
