@@ -29,12 +29,9 @@ const Familiar = db.define('familiar', {
   },
 })
 
-Familiar.belongsTo(Witch)
-Witch.hasMany(Familiar)
-
-const witches = [
+const seedWitches = [
   {
-    name: 'Gertrude',
+    name: 'Sabrina',
     age: 45.75,
   },
   {
@@ -43,7 +40,7 @@ const witches = [
   },
 ]
 
-const familiars = [
+const seedFamiliars = [
   {
     name: 'Flappy',
     species: 'bat',
@@ -53,25 +50,15 @@ const familiars = [
   },
 ]
 
-const halloween = async () => {
+const seed = async () => {
   try {
     await db.sync({ force: true })
-    const [[gertrude, baba], [flappy, fluffy]] = await Promise.all([
-      Witch.bulkCreate(witches),
-      Familiar.bulkCreate(familiars, { returning: true }),
-    ])
-    // console.log(fluffy.name)
-    // console.log(fluffy.__proto__)
-    // await Promise.all([flappy.setWitch(baba), fluffy.setWitch(baba)])
-    const aWitch = await Witch.findOne({
-      where: { id: 1 },
-      raw: true
-    })
-    console.log(aWitch)
-    db.close()
+    console.log('hello')
+    const witches = await Witch.bulkCreate(seedWitches)
+    console.log(witches.map(witch => witch.name))
   } catch (err) {
     console.error(err)
     db.close()
   }
 }
-halloween()
+seed()
